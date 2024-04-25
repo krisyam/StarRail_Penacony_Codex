@@ -1,186 +1,39 @@
-import { StyleSheet, View, Pressable, Image } from "react-native";
+import { StyleSheet, View, Pressable, Image, Text, TouchableOpacity } from "react-native";
 import React from "react";
-import Modal from "react-native-modal";
-import Link from "./LinkComponent.js";
-import { width, height } from "../GlobalStyles.js";
-import { Icon } from "@rneui/base";
+import { width, height } from "../../GlobalStyles.js";
+import { ModalContainer } from "../common/ModalContainer.js";
+import { useNavigation } from "@react-navigation/native";
 
-function Navigation(props) {
+export default Navigation = ({
+    modalVisible=false,
+    setModalVisible
+}) => {
+    const navigation = useNavigation()
     const handleCloseModal = () => {
-        props.setModalVisible(false);
+        setModalVisible(false);
     };
     return (
-        <>
-            <Modal
-                style={{ margin: 0 }}
-                transparent={true}
-                isVisible={props.modalVisible}
-                animationIn="slideInLeft"
-                animationOut="slideOutLeft"
-                onRequestClose={() => handleCloseModal()}
-            >
-                <Pressable
-                    style={styles.void_out_zone}
-                    onPress={() => handleCloseModal()}
-                />
-                <View style={styles.modalContainer}>
-                    <View style={styles.logo_n_close}>
-                        {/* Both logo and X */}
-                        <Image
-                            source={require("../../assets/icons/SmallLogo.png")}
-                        />
-                        <Pressable
-                            style={styles.closeButton}
-                            onPress={() => handleCloseModal()}
-                        >
-                            <Icon
-                                name="x"
-                                type="feather"
-                                color="white"
-                                size={20}
-                                iconStyle={{
-                                    marginRight: 5,
-                                }}
-                            />
-                        </Pressable>
-                    </View>
-                    <View>
-                        <Link
-                            img={
-                                <Icon
-                                    name="home"
-                                    type="antdesign"
-                                    color="white"
-                                    size={20}
-                                    iconStyle={{
-                                        marginRight: 5,
-                                    }}
-                                />
-                            }
-                            titleName="Dashboard"
-                            link="Dashboard"
-                            close={handleCloseModal}
-                        />
-                        <Link
-                            img={
-                                <Icon
-                                    name="filetext1"
-                                    type="antdesign"
-                                    color="white"
-                                    size={20}
-                                    iconStyle={{
-                                        marginRight: 5,
-                                    }}
-                                />
-                            }
-                            titleName="Notes"
-                            link="Notes"
-                            close={handleCloseModal}
-                        />
-                        <Link
-                            img={
-                                <Icon
-                                    name="calendar"
-                                    type="antdesign"
-                                    color="white"
-                                    size={20}
-                                    iconStyle={{
-                                        marginRight: 5,
-                                    }}
-                                />
-                            }
-                            titleName="Calendar"
-                            link="Calendar"
-                            close={handleCloseModal}
-                        />
-                        <Link
-                            img={
-                                <Icon
-                                    name="clockcircleo"
-                                    type="antdesign"
-                                    color="white"
-                                    size={20}
-                                    iconStyle={{
-                                        marginRight: 5,
-                                    }}
-                                />
-                            }
-                            titleName="Schedule"
-                            link="Schedule"
-                            close={handleCloseModal}
-                        />
-                        <Link
-                            img={
-                                <Icon
-                                    name="copy1"
-                                    type="antdesign"
-                                    color="white"
-                                    size={20}
-                                    iconStyle={{
-                                        marginRight: 5,
-                                    }}
-                                />
-                            }
-                            titleName="Flashcards"
-                            link="Flashcards"
-                            close={handleCloseModal}
-                        />
-                        <Link
-                            img={
-                                <Icon
-                                    name="book"
-                                    type="antdesign"
-                                    color="white"
-                                    size={20}
-                                    iconStyle={{
-                                        marginRight: 5,
-                                    }}
-                                />
-                            }
-                            titleName="Quiz"
-                            link="Quiz"
-                            close={handleCloseModal}
-                        />
-                        <Link
-                            img={
-                                <Icon
-                                    name="download"
-                                    type="antdesign"
-                                    color="white"
-                                    size={20}
-                                    iconStyle={{
-                                        marginRight: 5,
-                                    }}
-                                />
-                            }
-                            titleName="File Sharing"
-                            link="File Sharing"
-                            close={handleCloseModal}
-                        />
-                        <Link
-                            img={
-                                <Icon
-                                    name="setting"
-                                    type="antdesign"
-                                    color="white"
-                                    size={20}
-                                    iconStyle={{
-                                        marginRight: 5,
-                                    }}
-                                />
-                            }
-                            titleName="Settings"
-                            link="Settings"
-                            close={handleCloseModal}
-                        />
-                    </View>
-                </View>
-            </Modal>
-        </>
+        <ModalContainer 
+            isDisplay={modalVisible}
+            handleExit={handleCloseModal}
+            // mainModalContainerStyle={styles.mainModalContainer}
+            containerStyle={styles.mainModalContainer}
+        >
+            <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+                <Text>Dashboard</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+                <Text>Hello world</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+                <Text>Herta Spin</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Herta Spin')}>
+                <Text>Another Herta Spin</Text>
+            </TouchableOpacity>
+        </ModalContainer>
     );
 }
-
-export default Navigation;
 
 const styles = StyleSheet.create({
     white_text: {
@@ -188,13 +41,15 @@ const styles = StyleSheet.create({
         color: "#fff",
         alignItems: "center",
     },
-    modalContainer: {
+    mainModalContainer: {
         flex: 1,
         width: "50%",
+        borderRadius: 0,
+        borderTopRightRadius: 20,
+        borderBottomRightRadius: 20,
         alignSelf: "flex-start",
         justifyContent: "flex-start",
-        backgroundColor: "#2655AD",
-        color: "#fff",
+        backgroundColor: "#AEAEAE",
         elevation: 50,
     },
     logo_n_close: {

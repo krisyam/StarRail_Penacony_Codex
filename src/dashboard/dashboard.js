@@ -4,6 +4,7 @@ import Draggable from 'react-native-draggable'
 import { globalStyles, height, width } from '../../GlobalStyles'
 import { useNavigation } from '@react-navigation/native'
 import { characterData } from '../common/Data/characterData'
+import WebView from 'react-native-webview'
 
 export default DashboardPage = () => {
     const navigation = useNavigation()
@@ -19,6 +20,9 @@ export default DashboardPage = () => {
     }
     return (
         <View style={globalStyles.flexContainer}>
+            {/* <WebView
+                source={{ uri: 'https://star-rail-map.appsample.com/location?names=BasicTreasure,BountifulTreasure,SpaceAnchor&no_heading=1&map=the_reverie_reality' }}
+            /> */}
             <DraggableContainer title={'Characters'} maxY={160}>
                     <View style={dashboardStyles.characterRow}>
                         <CharacterCard name={'Acheron'} handleNavigation={() => handleNavigation('Acheron')}/>
