@@ -1,10 +1,11 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import GlobalContext from "./GlobalContext.js";
-import { fetchData, removeData, storeData } from "../functions.js";
+import { fetchData, storeData } from "../functions.js";
 import { AppReducer, Actions } from "./AppReducer.js";
 
 const initialState = {
     language: "jp",
+    hertaSpinCounter: 0
 };
 
 const GlobalProvider = ({ children }) => {
@@ -18,8 +19,16 @@ const GlobalProvider = ({ children }) => {
                 payload: data ? data : initialState.language,
             });
         }
+        async function fetchHertaSpinCounter() {
+            const data = await JSON.parse(await fetchData("hertaSpinCounter"));
+            dispatch({
+                type: Actions.UPDATE_HERTASPINCOUNTER,
+                payload: data ? data : initialState.hertaSpinCounter,
+            });
+        }
         fetchLanguage();
-        console.log("state", state);  
+        fetchHertaSpinCounter();
+        console.log("state", state);
     }, []);
     const updateLanguage = async (data) => {
         dispatch({
@@ -31,11 +40,23 @@ const GlobalProvider = ({ children }) => {
             typeof data === "string" ? data : JSON.stringify(data),
         );
     };
+    const updateHertaSpinCounter = async (data) => {
+        dispatch({
+            type: Actions.UPDATE_HERTASPINCOUNTER,
+            payload: data,
+        });
+        await storeData(
+            "hertaSpinCounter",
+            typeof data === "string" ? data : JSON.stringify(data),
+        );
+    };
     return (
         <GlobalContext.Provider
             value={{
                 language: state.language,
+                hertaSpinCounter: state.hertaSpinCounter,
                 updateLanguage,
+                updateHertaSpinCounter,
             }}
         >
             {children}
