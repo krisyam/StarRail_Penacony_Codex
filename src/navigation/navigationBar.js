@@ -12,6 +12,10 @@ export default Navigation = ({
     const handleCloseModal = () => {
         setModalVisible(false);
     };
+    const handleOpenLink = (destination) => {
+        navigation.navigate(destination)
+        setModalVisible(false)
+    }
     return (
         <ModalContainer 
             isDisplay={modalVisible}
@@ -19,16 +23,16 @@ export default Navigation = ({
             // mainModalContainerStyle={styles.mainModalContainer}
             containerStyle={styles.mainModalContainer}
         >
-            <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+            <TouchableOpacity onPress={() => handleOpenLink('Dashboard')}>
                 <Text>Dashboard</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
-                <Text>Hello world</Text>
+            <TouchableOpacity onPress={() => handleOpenLink('Interactive Map')}>
+                <Text>Interactive Map</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+            <TouchableOpacity onPress={() => handleOpenLink('Herta Spin')}>
                 <Text>Herta Spin</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Herta Spin')}>
+            <TouchableOpacity onPress={() => handleOpenLink('Another Herta Spin')}>
                 <Text>Another Herta Spin</Text>
             </TouchableOpacity>
         </ModalContainer>
@@ -69,7 +73,7 @@ const styles = StyleSheet.create({
         left: 0,
         flex: 1,
         height: height,
-        width: width,
+        width: '100%',
         // backgroundColor: 'black',
         // opacity: 0.5,
         elevation: 49,

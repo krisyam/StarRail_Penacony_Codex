@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.res.Configuration
 import androidx.annotation.NonNull
 
+import com.brentvatne.react.ReactVideoPackage;
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactNativeHost
@@ -25,9 +26,11 @@ class MainApplication : Application(), ReactApplication {
         this,
         object : DefaultReactNativeHost(this) {
           override fun getPackages(): List<ReactPackage> {
+            val packages = PackageList(this).packages.toMutableList()
             // Packages that cannot be autolinked yet can be added manually here, for example:
-            // packages.add(new MyReactNativePackage());
-            return PackageList(this).packages
+            // packages.add(MyReactNativePackage())
+            packages.add(ReactVideoPackage())
+            return packages
           }
 
           override fun getJSMainModuleName(): String = ".expo/.virtual-metro-entry"
