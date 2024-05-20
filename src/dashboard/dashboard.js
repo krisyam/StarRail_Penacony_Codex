@@ -9,32 +9,28 @@ export default DashboardPage = () => {
     const navigation = useNavigation()
     const handleNavigation = (name) => {
         const char = characterData.find(data => data.name === name)
-        navigation.navigate("Character Page", {
-            name: name,
-            rarity: char.rarity, 
-            path: char.path, 
-            combatType: char.combatType
-        })
-        console.log("Navigating to", char, 'Page')
+        navigation.navigate("Character Page", {character: char})
     }
     return (
         <View style={globalStyles.flexContainer}>
-            <DraggableContainer title={'Characters'} maxY={160}>
+            <DraggableContainer title={'Characters'} maxY={160} paddingBottom={320}>
+                <ScrollView>
                     <View style={dashboardStyles.characterRow}>
                         <CharacterCard name={'Acheron'} handleNavigation={() => handleNavigation('Acheron')}/>
                         <CharacterCard name={'Aventurine'} handleNavigation={() => handleNavigation('Aventurine')}/>
                         <CharacterCard name={'Black Swan'} handleNavigation={() => handleNavigation('Black Swan')}/>
                     </View>
                     <View style={dashboardStyles.characterRow}>
-                        <CharacterCard name={'Firefly'} handleNavigation={() => handleNavigation('Firefly')}/>
+                        <CharacterCard name={'Robin'} handleNavigation={() => handleNavigation('Robin')}/>
                         <CharacterCard name={'Gallagher'} handleNavigation={() => handleNavigation('Gallagher')}/>
                         <CharacterCard name={'Misha'} handleNavigation={() => handleNavigation('Misha')}/>
                     </View>
                     <View style={dashboardStyles.characterRow}>
                         <CharacterCard name={'Sparkle'} handleNavigation={() => handleNavigation('Sparkle')}/>
                     </View>
+                </ScrollView>
             </DraggableContainer>
-            <DraggableContainer title={'Story'} offset={60} maxY={100}>
+            <DraggableContainer title={'Story'} offset={60} maxY={100} paddingBottom={300}>
                 <ScrollView>
                     <Text style={[globalStyles.lightText, {height: height - 900}]}>
                         {`
@@ -57,20 +53,20 @@ function DraggableContainer({
     title,  
     offset,
     maxY=0,
+    paddingBottom=0
 }) {
     return (
         <Draggable
             y={ 160 + (offset ? offset : 0)}
             minX={0}
             maxX={0}
-            minY={150 + (offset ? offset : 0)}
+            minY={100 + (offset ? offset : 0)}
             maxY={height * 1.9 - maxY}
             touchableOpacityProps={{ activeOpacity: 1 }}
         >
-            <View style={dashboardStyles.draggableContainer} >
+            <View style={[dashboardStyles.draggableContainer, {paddingBottom: paddingBottom}]} >
                 <View style={dashboardStyles.titleContainer}>
                     <Text style={[globalStyles.lightText, dashboardStyles.title]}>{title ? title : 'No Title'}</Text>
-                    <Button title="Button" onPress={() => console.log("I do dis later")} />
                 </View>
                 {children}
             </View>
@@ -82,7 +78,7 @@ function CharacterCard({ name, handleNavigation }) {
         Acheron: require('../../assets/characters/Acheron.png'),
         Aventurine: require('../../assets/characters/Aventurine.png'),
         [`Black Swan`]: require('../../assets/characters/Black Swan.png'),
-        Firefly: require('../../assets/characters/Firefly.png'),
+        Robin: require('../../assets/characters/Robin.png'),
         Gallagher: require('../../assets/characters/Gallagher.png'),
         Misha: require('../../assets/characters/Misha.png'),
         Sparkle: require('../../assets/characters/Sparkle.png'),
@@ -114,6 +110,7 @@ const dashboardStyles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'flex-end',
         alignItems: "center",
+        marginBottom: 20,
     },
     title: {
         paddingRight: 20,
