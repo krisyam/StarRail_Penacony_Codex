@@ -55,7 +55,7 @@ export default CharacterPage = ({ route }) => {
                     <Image source={elementImageSource}/>
                     <WhiteText style={charStyles.characterType}>{character.element ? character.element : ''}</WhiteText>
                 </View>
-                <WhiteText >{character.intro}</WhiteText>
+                <WhiteText style={{marginBottom: 20}}>{character.intro}</WhiteText>
                 {character?.videos?.showcase &&
                     <YoutubePlayer
                         width={width/1.1}
@@ -64,16 +64,24 @@ export default CharacterPage = ({ route }) => {
                         videoId={showcaseVideoId}
                     />
                 }
-                <WhiteText style={charStyles.characterDetailsTitle}>{character.skills.basicAtk.name}</WhiteText>
-                <WhiteText>{character.skills.basicAtk.description}</WhiteText>
-                <WhiteText style={charStyles.characterDetailsTitle}>{character.skills.skill.name}</WhiteText>
-                <WhiteText>{character.skills.skill.description}</WhiteText>
-                <WhiteText style={charStyles.characterDetailsTitle}>{character.skills.ultimate.name}</WhiteText>
-                <WhiteText>{character.skills.ultimate.description}</WhiteText>
-                <WhiteText style={charStyles.characterDetailsTitle}>{character.skills.talent.name}</WhiteText>
-                <WhiteText>{character.skills.talent.description}</WhiteText>
-                <WhiteText style={charStyles.characterDetailsTitle}>{character.skills.technique.name}</WhiteText>
-                <WhiteText>{character.skills.technique.description}</WhiteText>
+                <View style={charStyles.moduleContainer}>
+                    <WhiteText style={{fontWeight: '800', fontSize: 28, textAlign: 'center'}}>Skills</WhiteText>
+                    <View>
+                        <SkillsDetails item={character.skills.basicAtk}/>
+                    </View>
+                    <View>
+                        <SkillsDetails item={character.skills.skill}/>
+                    </View>
+                    <View>
+                        <SkillsDetails item={character.skills.ultimate}/>
+                    </View>
+                    <View>
+                        <SkillsDetails item={character.skills.talent}/>
+                    </View>
+                    <View>
+                        <SkillsDetails item={character.skills.technique}/>
+                    </View>
+                </View>
 
                 {character.eidolons &&
                     character.eidolons.map((item, index) => (
@@ -84,12 +92,33 @@ export default CharacterPage = ({ route }) => {
         </ScrollView>
     )
 }
-
+function SkillsDetails({item, index, name}){
+    return(
+        <>  
+            {/* <Image source={eidolonImagePaths[name][index]}/> */}
+            <View style={[globalStyles.flexRow, charStyles.marginTop20]}>
+                {/* <Image
+                    style={charStyles.smallIcon}
+                    source={eidolonImagePaths[name][index]}
+                    resizeMode='contain'
+                    /> */}
+                <WhiteText style={charStyles.characterDetailsTitle}>{item.name}</WhiteText>
+            </View>
+            <WhiteText>{item.description}</WhiteText>
+        </>
+    )
+}
 function EidolonDetails({item, index, name}){
     return(
         <>  
-            <Image source={eidolonImagePaths[name][index]}/>
-            <WhiteText style={charStyles.characterDetailsTitle}>{item.name}</WhiteText>
+            <View style={[globalStyles.flexRow, charStyles.marginTop20]}>
+                <Image
+                    style={charStyles.smallIcon}
+                    source={eidolonImagePaths[name][index]}
+                    resizeMode='contain'
+                    />
+                <WhiteText style={charStyles.characterDetailsTitle}>{item.name}</WhiteText>
+            </View>
             <WhiteText>{item.description}</WhiteText>
         </>
     )
@@ -102,6 +131,9 @@ function WhiteText(props) {
     );
 }
 const charStyles = StyleSheet.create({
+    marginTop20: {
+        marginTop: 20,
+    },
     mainContainer: {
         backgroundColor: "rgba(0, 0, 0, 0.75)"
     },
@@ -116,6 +148,14 @@ const charStyles = StyleSheet.create({
     },
     characterInfo: {
         paddingLeft: 20,
+        paddingRight: 20,
+        paddingBottom: 30,
+    },
+    smallIcon: {
+        height: 40,
+        width: 40,
+        marginLeft: 10,
+        marginRight: 20,
     },
     characterDetailsTitle: {
         fontSize: 18,
@@ -140,4 +180,11 @@ const charStyles = StyleSheet.create({
         // bottom: 0,
         // right: 0,
     },
+    moduleContainer: {
+        backgroundColor: 'rgba(11, 11, 11, 0.90)',
+        borderRadius: 20,
+        padding: 20,
+        margin: 2,
+        marginTop: 20,
+    }
 })

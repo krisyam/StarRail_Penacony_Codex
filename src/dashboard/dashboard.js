@@ -11,9 +11,10 @@ export default DashboardPage = () => {
         const char = characterData.find(data => data.name === name)
         navigation.navigate("Character Page", {character: char})
     }
+    console.log(height, 'height')
     return (
         <View style={globalStyles.flexContainer}>
-            <DraggableContainer title={'Characters'} maxY={160} paddingBottom={320}>
+            <DraggableContainer title={'Characters'} maxY={160} paddingBottom={320} passedHeight={height - 400}>
                 <ScrollView>
                     <View style={dashboardStyles.characterRow}>
                         <CharacterCard name={'Acheron'} handleNavigation={() => handleNavigation('Acheron')}/>
@@ -30,9 +31,9 @@ export default DashboardPage = () => {
                     </View>
                 </ScrollView>
             </DraggableContainer>
-            <DraggableContainer title={'Story'} offset={60} maxY={100} paddingBottom={300}>
+            <DraggableContainer title={'Story'} offset={60} maxY={100} paddingBottom={300} passedHeight={height - 350}>
                 <ScrollView>
-                    <Text style={[globalStyles.lightText, {height: height - 900}]}>
+                    <Text style={globalStyles.lightText}>
                         {`
 \t\t\t\tAcheron is the first person from the Penacony cast we meet – and the circumstances couldn’t be more mysterious, given that the Trailblazer falls unconscious and wakes up in a dream that features her. She professes to be a member of the Galaxy Rangers, a group that travels around the cosmos to dish out justice, but doesn’t seem to be all that concerned about her identity – “Galaxy Ranger, Acheron… This is what they call me. You can call me whatever you want.”/n
 \t\t\t\tDuring that initial illusion, Acheron asks all sorts of questions, foretells many hardships and tragedies for Trailblazer, and ends up shedding tears as she kills them to send them back to reality. There is also the curious use of red text for some of Acheron’s sentences in the subtitles – perhaps connected to the “glimpse of fleeting red” she says would appear before Trailblazer when they have to make a choice. She says she’s got some memory issues, too./n
@@ -42,7 +43,18 @@ export default DashboardPage = () => {
                     </Text>
                 </ScrollView>
             </DraggableContainer>
-            <DraggableContainer title={'About Penacony'} offset={120} maxY={30}>
+            <DraggableContainer title={'About Penacony'} offset={120} maxY={30} passedHeight={height - 350}>
+                <ScrollView>
+                    <Text style={globalStyles.lightText}>
+                        {`
+\t\t\t\tPenacony, also known as the "Planet of Festivities", is a colossal structure located in the Asdana star system. It's a world that blurs the lines between reality and dreams, making it a place of endless possibilities.
+\t\t\t\tThe most iconic landmark of Penacony is the soaring hotel, "The Reverie". Above the fathomless sky, The Reverie is a symbol of luxury and grandeur, and a popular vacation spot where interstellar celebrities party the days away and the affluent from diverse worlds revel in lavish ventures.
+\t\t\t\tPenacony was once belonged to the IPC which was a frontier prison. It was then transformed to an interstellar transportaion hub and the gateway to the Sweetdream Paradise by The Family This transformation has changed Penacony to an experiencing unparalleled and explosive prosperity.
+\t\t\t\tThe planet is divided into two main areas: Reality and Dreamscape. In the Reality area, you can witness the physical structures and inhabitants of Penacony, and in the Dreamscape, it is a realm of dreams where everything can come true. It's through the Dreampools in the hotel that guests are  transported to this dream realm.
+\t\t\t\tDespite its current status as a dream city and cosmic resort, Penacony still carries the weight of its heavy past. During under the ownership of the IPC, it was a place where exiled prisoners were forced to mend the leak through which memoria seeps into the galaxy. As they labored while being exposed to memoria, the prisoners gradually discovered themselves entering a captivating shared dream world, where they obtained a single shared desire: freedom. This history adds a layer of depth and intrigue to the vibrant and dreamy facade of Penacony.
+                        `}
+                    </Text>
+                </ScrollView>
             </DraggableContainer>
         </View>
     )
@@ -53,7 +65,8 @@ function DraggableContainer({
     title,  
     offset,
     maxY=0,
-    paddingBottom=0
+    paddingBottom=0,
+    passedHeight=0,
 }) {
     return (
         <Draggable
@@ -68,7 +81,9 @@ function DraggableContainer({
                 <View style={dashboardStyles.titleContainer}>
                     <Text style={[globalStyles.lightText, dashboardStyles.title]}>{title ? title : 'No Title'}</Text>
                 </View>
-                {children}
+                <View style={{height: passedHeight}}>
+                    {children}
+                </View>
             </View>
         </Draggable>
     )
