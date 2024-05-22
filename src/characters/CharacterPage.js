@@ -5,104 +5,130 @@ import { bannerImageLinks,
     rarityImageLinks, 
     pathImageLinks, 
     elementImageLinks,
-    eidolonImagePaths 
+    eidolonImagePaths, 
+    skillsImagePaths
 } from '../common/Data/imageLinksData'
 import YoutubePlayer from "react-native-youtube-iframe";
 import { Button } from '@rneui/base';
+import { AccordionComponent } from '../common/Accordion';
 
 export default CharacterPage = ({ route }) => {
     const { character } = route.params
-    const [playing, setPlaying] = useState(false);
     const trailerVideoId = character?.videos?.trailer ? character.videos.trailer : 'dQw4w9WgXcQ';
     const showcaseVideoId = character?.videos?.showcase ? character.videos.showcase : 'dQw4w9WgXcQ';
     const bannerImageSource = bannerImageLinks[character.name];
     const rarityImageSource = rarityImageLinks[character.rarity]
     const pathImageSource = pathImageLinks[character.path]
     const elementImageSource = elementImageLinks[character.element]
-    const togglePlaying = useCallback(() => {
-        setPlaying((prev) => !prev);
-    }, []);
     return (
         <ScrollView style={[globalStyles.flexContainer, charStyles.mainContainer]}>
-            
-            {character?.videos?.trailer ?
+            {character?.videos?.trailer ? (
                 <YoutubePlayer
                     width={width}
                     height={240}
-                    play={playing}
                     videoId={trailerVideoId}
                 />
-                :
-                <Image 
+            ) : (
+                <Image
                     source={bannerImageSource}
-                    style={{width: width}}
+                    style={{ width: width }}
                     resizeMode='contain'
                 />
-            }
+            )}
             <WhiteText style={charStyles.characterName}>{character.name}</WhiteText>
-            <View style={[globalStyles.flexContainer,charStyles.characterInfo]}>
+            <View style={[globalStyles.flexContainer, charStyles.characterInfo]}>
                 <View style={globalStyles.flexRow}>
                     <WhiteText style={charStyles.characterDetails}>Rarity</WhiteText>
-                    <Image source={rarityImageSource}/>
+                    <Image source={rarityImageSource} />
                 </View>
-                <View style={[globalStyles.flexRow, {marginTop: 5}]}>
+                <View style={[globalStyles.flexRow, { marginTop: 5 }]}>
                     <WhiteText style={charStyles.characterDetails}>Path</WhiteText>
-                    <Image source={pathImageSource}/>
-                    <WhiteText style={charStyles.characterType}>{character.path ? character.path : ''}</WhiteText>
+                    <Image source={pathImageSource} />
+                    <WhiteText style={charStyles.characterType}>
+                        {character.path ? character.path : ''}
+                    </WhiteText>
                 </View>
-                <View style={[globalStyles.flexRow, {marginTop: 5}]}>
+                <View style={[globalStyles.flexRow, { marginTop: 5 }]}>
                     <WhiteText style={charStyles.characterDetails}>Combat Type</WhiteText>
-                    <Image source={elementImageSource}/>
-                    <WhiteText style={charStyles.characterType}>{character.element ? character.element : ''}</WhiteText>
+                    <Image source={elementImageSource} />
+                    <WhiteText style={charStyles.characterType}>
+                        {character.element ? character.element : ''}
+                    </WhiteText>
                 </View>
-                <WhiteText style={{marginBottom: 20}}>{character.intro}</WhiteText>
-                {character?.videos?.showcase &&
+                <WhiteText style={[charStyles.marginTop20, { marginBottom: 20 }]}>
+                    {character.intro}
+                </WhiteText>
+                {character?.videos?.showcase && (
                     <YoutubePlayer
-                        width={width/1.1}
+                        width={width / 1.1}
                         height={200}
-                        play={playing}
                         videoId={showcaseVideoId}
                     />
-                }
-                <View style={charStyles.moduleContainer}>
-                    <WhiteText style={{fontWeight: '800', fontSize: 28, textAlign: 'center'}}>Skills</WhiteText>
+                )}
+                <AccordionComponent
+                    title={
+                        <WhiteText
+                            style={{ fontWeight: '800', fontSize: 28, textAlign: 'center' }}
+                        >
+                            Skills
+                        </WhiteText>
+                    }
+                    style={charStyles.moduleContainer}
+                >
                     <View>
-                        <SkillsDetails item={character.skills.basicAtk}/>
+                        <SkillsDetails name={character.name} item={character.skills.basicAtk} index={0} />
                     </View>
                     <View>
-                        <SkillsDetails item={character.skills.skill}/>
+                        <SkillsDetails name={character.name} item={character.skills.skill} index={1} />
                     </View>
                     <View>
-                        <SkillsDetails item={character.skills.ultimate}/>
+                        <SkillsDetails name={character.name} item={character.skills.ultimate} index={2} />
                     </View>
                     <View>
-                        <SkillsDetails item={character.skills.talent}/>
+                        <SkillsDetails name={character.name} item={character.skills.talent} index={3} />
                     </View>
                     <View>
-                        <SkillsDetails item={character.skills.technique}/>
+                        <SkillsDetails name={character.name} item={character.skills.technique} index={4} />
                     </View>
-                </View>
+                </AccordionComponent>
 
-                {character.eidolons &&
-                    character.eidolons.map((item, index) => (
-                        <EidolonDetails name={character.name} item={item} index={index} />
-                    ))
-                }
+                <AccordionComponent
+                    title={
+                        <WhiteText
+                            style={{ fontWeight: '800', fontSize: 28, textAlign: 'center' }}
+                        >
+                            Eidolons
+                        </WhiteText>
+                    }
+                    style={charStyles.moduleContainer}
+                >
+                    {character.eidolons &&
+                        character.eidolons.map((item, index) => (
+                            <EidolonDetails name={character.name} item={item} index={index} />
+                        ))}
+                </AccordionComponent>
             </View>
         </ScrollView>
-    )
+    );
 }
 function SkillsDetails({item, index, name}){
+    const tag = [
+        'Basic Attack',
+        'Skill',
+        'Ultimate',
+        'Talent',
+        'Technique',
+    ]
     return(
         <>  
-            {/* <Image source={eidolonImagePaths[name][index]}/> */}
-            <View style={[globalStyles.flexRow, charStyles.marginTop20]}>
-                {/* <Image
+            <WhiteText style={[charStyles.marginTop20, {textAlign: 'center'}]}>{tag[index]}</WhiteText>
+            <View style={globalStyles.flexRow}>
+                <Image
                     style={charStyles.smallIcon}
-                    source={eidolonImagePaths[name][index]}
+                    source={skillsImagePaths[name][index]}
                     resizeMode='contain'
-                    /> */}
-                <WhiteText style={charStyles.characterDetailsTitle}>{item.name}</WhiteText>
+                />
+                <WhiteText style={charStyles.characterDetailsTitle} numberOfLines={5}>{item.name}</WhiteText>
             </View>
             <WhiteText>{item.description}</WhiteText>
         </>
@@ -111,21 +137,26 @@ function SkillsDetails({item, index, name}){
 function EidolonDetails({item, index, name}){
     return(
         <>  
-            <View style={[globalStyles.flexRow, charStyles.marginTop20]}>
+            <WhiteText style={[charStyles.marginTop20, {textAlign: 'center'}]}>Eidolon {index+1}</WhiteText>
+            <View style={globalStyles.flexRow}>
                 <Image
                     style={charStyles.smallIcon}
                     source={eidolonImagePaths[name][index]}
                     resizeMode='contain'
-                    />
-                <WhiteText style={charStyles.characterDetailsTitle}>{item.name}</WhiteText>
+                />
+                <WhiteText style={charStyles.characterDetailsTitle} numberOfLines={5}>{item.name}</WhiteText>
             </View>
             <WhiteText>{item.description}</WhiteText>
         </>
     )
 }
-function WhiteText(props) {
+export function WhiteText(props) {
     return (
-        <Text style={[globalStyles.lightText,props.style]}>
+        <Text 
+            style={[globalStyles.lightText,props.style]}
+            numberOfLines={props.numberOfLines ? props.numberOfLines : 0}
+            ellipsizeMode='tail'
+        >
             {props.children}
         </Text>
     );

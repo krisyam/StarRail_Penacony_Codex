@@ -11,7 +11,6 @@ export default DashboardPage = () => {
         const char = characterData.find(data => data.name === name)
         navigation.navigate("Character Page", {character: char})
     }
-    console.log(height, 'height')
     return (
         <View style={globalStyles.flexContainer}>
             <DraggableContainer title={'Characters'} maxY={160} paddingBottom={320} passedHeight={height - 400}>

@@ -1,9 +1,12 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React, { useEffect, useContext, useState } from 'react'
 import { Image } from 'react-native'
 import { Button } from '@rneui/base'
 import GlobalContext from '../common/GlobalVariables/GlobalContext'
 import Sound from 'react-native-sound'
+import { StyleSheet } from 'react-native'
+import { width } from '../../GlobalStyles'
+import { WhiteText } from '../characters/CharacterPage'
 
 export default HertaSpin = () => {
   const { language, hertaSpinCounter, updateLanguage, updateHertaSpinCounter } = useContext(GlobalContext);
@@ -27,6 +30,8 @@ export default HertaSpin = () => {
     let randomNum
     if (lang === 'ch') {
       randomNum = Math.floor(Math.random() * 2) + 1;
+    } else if (lang === 'jp') {
+      randomNum = Math.floor(Math.random() * 2.4) + 1;
     } else {
       randomNum = Math.floor(Math.random() * 3) + 1;
     }
@@ -96,15 +101,98 @@ export default HertaSpin = () => {
     };
   }, [soundCounter]);
   return (
-    <View>
-      <Image source={require('../../assets/herta-kurukuru.gif')} />
-      <Button title="Button" onPress={playAudio} />
-      <Text>{lang}</Text>
-      <Text>{soundCounter}</Text>
-      <Button title="Change Language to English" onPress={() => changeLanguage('en')} />
-      <Button title="Change Language to Japanese" onPress={() => changeLanguage('jp')} />
-      <Button title="Change Language to Korean" onPress={() => changeLanguage('kr')} />
-      <Button title="Change Language to Chinese" onPress={() => changeLanguage('ch')} />
-    </View>
+    <ScrollView>
+      <View style={{backgroundColor: 'rgba(157, 136, 211, 0.70)', paddingBottom: 40}}>
+        <Image 
+          source={require('../../assets/herta-kurukuru.gif')} 
+          resizeMode='contain'
+          style={hertaStyles.herta}
+        />
+        <Text style={[hertaStyles.counterText, {marginTop: 30}]}>Herta has been kuru~ed for</Text>
+        <Text style={[hertaStyles.counter, hertaStyles.marginTop]}>{soundCounter}</Text>
+        <Text style={[hertaStyles.counterText, hertaStyles.marginTop]}>times</Text>
+        <Button 
+          title="Kururu?" 
+          onPress={playAudio} 
+          containerStyle={hertaStyles.marginTop}
+          buttonStyle={hertaStyles.kururuButton}
+        />
+      </View>
+      <View style={hertaStyles.marginTop}>
+        <Text>Language Change</Text>
+        <View style={hertaStyles.row}>
+          <Button 
+            containerStyle={hertaStyles.langChangeContainer} 
+            buttonStyle={hertaStyles.langChangeButton}
+            title="English" 
+            onPress={() => changeLanguage('en')} 
+          />
+          <Button 
+            containerStyle={hertaStyles.langChangeContainer} 
+            buttonStyle={hertaStyles.langChangeButton}
+            title="Japanese" 
+            onPress={() => changeLanguage('jp')} 
+          />
+        </View>
+        <View style={hertaStyles.row}>
+          <Button 
+            containerStyle={hertaStyles.langChangeContainer} 
+            buttonStyle={hertaStyles.langChangeButton}
+            title="Korean" 
+            onPress={() => changeLanguage('kr')} 
+          />
+          <Button 
+            containerStyle={hertaStyles.langChangeContainer} 
+            buttonStyle={hertaStyles.langChangeButton}
+            title="Chinese" 
+            onPress={() => changeLanguage('ch')} 
+          />
+        </View>
+      </View>
+    </ScrollView>
   )
 }
+
+const hertaStyles = StyleSheet.create({
+  marginTop: {
+    marginTop: 15,
+  },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 5,
+    justifyContent: 'space-around',
+  },
+  herta: {
+    width: width/1.5,
+    height: width/1.5,
+    alignSelf: 'center',
+    padding: 80,
+    marginTop: 40,
+    borderRadius: 50
+  },
+  counterText: {
+    fontSize: 18,
+    fontWeight: 600,
+    alignSelf: 'center'
+  },
+  counter: {
+    fontSize: 24,
+    fontWeight: 600,
+    alignSelf: 'center',
+  },
+  kururuButton: {
+    width: width/3,
+    borderRadius: 40,
+    alignSelf: 'center',
+    backgroundColor: '#6b5c91'
+  },
+  langChangeContainer: {
+    width: width/2.5,
+    elevation: 4
+  },
+  langChangeButton: {
+    borderRadius: 50,
+    backgroundColor: '#6b5c91',
+  },
+})

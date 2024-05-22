@@ -29,6 +29,57 @@ export const elementImageLinks = {
     Quantum: require('../../../assets/elementImages/Quantum.png'),
     Imaginary: require('../../../assets/elementImages/Imaginary.png'),
 };
+export const skillsImagePaths = {
+    Acheron: [
+        require('../../../assets/characters/Acheron/Basic ATK.png'),
+        require('../../../assets/characters/Acheron/Skill.png'),
+        require('../../../assets/characters/Acheron/Ult.png'),
+        require('../../../assets/characters/Acheron/Talent.png'),
+        require('../../../assets/characters/Acheron/Technique.png'),
+    ],
+    Aventurine: [
+        require('../../../assets/characters/Aventurine/Basic ATK.png'),
+        require('../../../assets/characters/Aventurine/Skill.png'),
+        require('../../../assets/characters/Aventurine/Ult.png'),
+        require('../../../assets/characters/Aventurine/Talent.png'),
+        require('../../../assets/characters/Aventurine/Technique.png'),
+    ],
+    [`Black Swan`]: [
+        require('../../../assets/characters/Black Swan/Basic ATK.png'),
+        require('../../../assets/characters/Black Swan/Skill.png'),
+        require('../../../assets/characters/Black Swan/Ult.png'),
+        require('../../../assets/characters/Black Swan/Talent.png'),
+        require('../../../assets/characters/Black Swan/Technique.png'),
+    ],
+    Robin: [
+        require('../../../assets/characters/Robin/Basic ATK.png'),
+        require('../../../assets/characters/Robin/Skill.png'),
+        require('../../../assets/characters/Robin/Ult.png'),
+        require('../../../assets/characters/Robin/Talent.png'),
+        require('../../../assets/characters/Robin/Technique.png'),
+    ],
+    Gallagher: [
+        require('../../../assets/characters/Gallagher/Basic ATK.png'),
+        require('../../../assets/characters/Gallagher/Skill.png'),
+        require('../../../assets/characters/Gallagher/Ult.png'),
+        require('../../../assets/characters/Gallagher/Talent.png'),
+        require('../../../assets/characters/Gallagher/Technique.png'),
+    ],
+    Misha: [
+        require('../../../assets/characters/Misha/Basic ATK.png'),
+        require('../../../assets/characters/Misha/Skill.png'),
+        require('../../../assets/characters/Misha/Ult.png'),
+        require('../../../assets/characters/Misha/Talent.png'),
+        require('../../../assets/characters/Misha/Technique.png'),
+    ],
+    Sparkle: [
+        require('../../../assets/characters/Sparkle/Basic ATK.png'),
+        require('../../../assets/characters/Sparkle/Skill.png'),
+        require('../../../assets/characters/Sparkle/Ult.png'),
+        require('../../../assets/characters/Sparkle/Talent.png'),
+        require('../../../assets/characters/Sparkle/Technique.png'),
+    ],
+};
 export const eidolonImagePaths = {
     Acheron: [
         require('../../../assets/characters/Acheron/Eidolon 1.png'),

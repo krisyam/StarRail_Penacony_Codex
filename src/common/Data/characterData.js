@@ -195,7 +195,8 @@ He won his current position by wagering against fate itself. He views life as a 
         path: 'Nihility',
         element: 'Wind',
         faction: "Garden of Recollection",
-        intro: "A Memokeeper from the Garden of Recollection. A mysterious and elegant soothsayer...",
+        intro: `A Memokeeper from the Garden of Recollection. A mysterious and elegant soothsayer.
+Bears a warm smile and is willing to patiently heed the words of another, and thus uses such means as a pretext to enter "memories" and gain a comprehension over the flow of all information. Feels strongly about collecting unique memories, yet the thoughts that guide her are hard to glean.`,
         videos: {
             trailer: "oz3AOWxq8KY",
             showcase: "CCef9QT8Tvc"
@@ -205,42 +206,46 @@ He won his current position by wagering against fate itself. He views life as a 
                 name: "Percipience, Silent Dawn",
                 energyGeneration: 20,
                 toughnessDamage: 30,
-                description: "Deals Wind DMG to a single target enemy, with a chance of inflicting 1 stack of Arcana..."
+                description: `Deals Wind DMG to a single target enemy, with a chance of inflicting 1 stack of Arcana. If the target already has Wind Shear, Bleed, Burn or Shock, each of them has a chance of inflicting 1 extra stack of Arcana to that target.`
             },
             skill: {
                 name: "Decadence, False Twilight",
                 energyGeneration: 30,
                 toughnessDamage: 60,
-                description: "Deals Wind DMG to a single target enemy and any adjacent targets..."
+                description: `Deals Wind DMG to a single target enemy and any adjacent targets. Inflicts 1 stack of Arcana on the enemy and the adjacent targets, and reducing their DEF that lasts for 3 turns.`
             },
             ultimate: {
                 name: "Bliss of Otherworld's Embrace",
                 energyCost: 120,
                 energyGeneration: 5,
                 toughnessDamage: 60,
-                description: "Deals Wind DMG to all enemies. Inflicts Epiphany on all enemies for 2 turns..."
+                description: `Deals Wind DMG to all enemies. Inflicts Epiphany on all enemies for 2 turns. Enemies affected by Epiphany take more DMG in their turn, and their Arcana effect is regarded as Wind Shear, Bleed, Burn and Shock effects. Additionally, when their Arcana effect is triggered at the beginning of the next turn, the Arcana stacks are not resetted, and this effect can be triggered up to 1 time in Epiphany's duration. Its charges are replenished when Epiphany is applied again.`
             },
             talent: {
                 name: "Loom of Fate's Caprice",
-                description: "Every time an enemy target receives DoT at the start of each turn, there's a chance for it to be inflicted with Arcana..."
+                description: `Every time an enemy target receives DoT at the start of each turn, there's a chance for it to be inflicted with Arcana. Enemy targets with Arcana receive Wind DoT equal to Black Swan's ATK at the start of each turn. Each stack of Arcana increases the Dot DMG Multiplier. Then Arcana resets to 1 stack. This can stack up to 50 times.
+Black Swan triggers additional effects based on the number of Arcana stacks inflicted on the target:
+3 or more - deals Wind Dot equal to Black Swan's ATK to adjacent targets, with a chance to inflict 1 stack of Arcana on said targets.
+7 or more - enables the current DoT dealt this time to ignore 20% of the target's and the adjacent targets' DEF
+`
             },
             technique: {
                 name: "From Façade to Vérité",
-                description: "When this Technique is used, there is a 150% base chance for each enemy to be inflicted with 1 stack of Arcana at the start of the next battle..."
+                description: `When this Technique is used, there is a 150% base chance for each enemy to be inflicted with 1 stack of Arcana at the start of the next battle. Each successful application of Arcana on a target inflicts another stack of Arcana on the same target, and this repeats until the Arcana applied fails. Each successful application of Arcana is equal to 50% of the base chance of the previous successful application of Arcana of that target.`
             }
         },
         traces: [
             {
                 name: "Viscera's Disquiet",
-                description: "After using the Skill to hit an enemy that has Wind Shear, Bleed, Burn or Shock..."
+                description: `After using the Skill to hit an enemy that has Wind Shear, Bleed, Burn or Shock, each of these debuffs has a chance of inflicting 1 extra stack of Arcana.`
             },
             {
                 name: "Goblet's Dredges",
-                description: "There is a chance to inflict 1 stack of Arcana when a target enters battle..."
+                description: `There is a chance to inflict 1 stack of Arcana when a target enters battle. Every time an enemy target receives DoT during a single attack by an ally, there is a chance for the target to be inflicted with 1 stack of Arcana, stacking up to 3 times during 1 single attack.`
             },
             {
                 name: "Candeflame's Portent",
-                description: "Increases this unit's DMG by an amount equal to their Effect Hit Rate up to a certain maximum DMG increase."
+                description: `Increases this unit's DMG by an amount equal to their Effect Hit Rate up to a certain maximum DMG increase.`
             }
         ],
         eidolons: [
