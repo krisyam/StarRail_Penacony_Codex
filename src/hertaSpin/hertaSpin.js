@@ -108,7 +108,7 @@ export default HertaSpin = () => {
           resizeMode='contain'
           style={hertaStyles.herta}
         />
-        <Text style={[hertaStyles.counterText, {marginTop: 30}]}>Herta has been kuru~ed for</Text>
+        <Text style={[hertaStyles.counterText, {marginTop: 30}]}>Herta has been doing kuru for</Text>
         <Text style={[hertaStyles.counter, hertaStyles.marginTop]}>{soundCounter}</Text>
         <Text style={[hertaStyles.counterText, hertaStyles.marginTop]}>times</Text>
         <Button 
@@ -119,7 +119,7 @@ export default HertaSpin = () => {
         />
       </View>
       <View style={hertaStyles.marginTop}>
-        <Text>Language Change</Text>
+        <Text style={hertaStyles.langChangeText}>Language Change</Text>
         <View style={hertaStyles.row}>
           <Button 
             containerStyle={hertaStyles.langChangeContainer} 
@@ -173,12 +173,12 @@ const hertaStyles = StyleSheet.create({
   },
   counterText: {
     fontSize: 18,
-    fontWeight: 600,
+    fontWeight: '600',
     alignSelf: 'center'
   },
   counter: {
     fontSize: 24,
-    fontWeight: 600,
+    fontWeight: '600',
     alignSelf: 'center',
   },
   kururuButton: {
@@ -186,6 +186,16 @@ const hertaStyles = StyleSheet.create({
     borderRadius: 40,
     alignSelf: 'center',
     backgroundColor: '#6b5c91'
+  },
+  langChangeText: {
+    fontSize: 24,
+    fontWeight: '500',
+    alignSelf: 'center',
+    color: '#1a1624',
+    paddingHorizontal: 40,
+    paddingVertical: 10,
+    borderRadius: 60,
+    backgroundColor: 'rgba(197, 197, 199, 0.85)',
   },
   langChangeContainer: {
     width: width/2.5,

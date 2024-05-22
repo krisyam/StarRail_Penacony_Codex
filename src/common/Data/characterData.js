@@ -374,7 +374,6 @@ Black Swan triggers additional effects based on the number of Arcana stacks infl
                 name: "Nectar Blitz",
                 energyGeneration: 20,
                 toughnessDamage: 90,
-                extradescription: "Reduces the target's ATK, lasting for 2 turns.",
                 description: "Deals Fire DMG to a single target enemy."
             },
             skill: {
@@ -387,7 +386,6 @@ Black Swan triggers additional effects based on the number of Arcana stacks infl
                 energyCost: 110,
                 energyGeneration: 5,
                 toughnessDamage: 60,
-                extradescription: "Inflicts Besotted on all enemies, lasting for 2 turns. At the same time, deals Fire DMG to all enemies, and enhances this unit's next Basic ATK to Nectar Blitz.",
                 description: "Inflicts Besotted on all enemies, lasting for 2 turns. At the same time, deals Fire DMG to all enemies, and enhances this unit's next Basic ATK to Nectar Blitz."
             },
             talent: {
@@ -462,20 +460,14 @@ Black Swan triggers additional effects based on the number of Arcana stacks infl
             skill: {
                 name: "R—Room Service",
                 energyGeneration: 30,
-                toughnessDamage: {
-                    main: 60,
-                    adjacent: 30
-                },
+                toughnessDamage: 60,
                 description: "Increases the Hits Per Action for Misha's next Ultimate by 1 hit. Deals Ice DMG to a single target enemy, and to adjacent targets."
             },
             ultimate: {
                 name: "G—Gonna Be Late!",
                 energyCost: 100,
                 energyGeneration: 5,
-                toughnessDamage: {
-                    firstHit: 30,
-                    subsequentHits: 15
-                },
+                toughnessDamage: 30,
                 maxHitsPerAction: 10,
                 description: "Has 3 Hits Per Action by default. First, uses 1 hit to deal Ice DMG to a single target enemy. Then, the rest of the hits each deals Ice to a single random enemy. Just before each hit lands, there is a chance to Freeze the target, lasting for 1 turn. While Frozen, enemy targets cannot take any actions, and at the start of their turn, they receive Additional Ice DMG equal to Misha's ATK. This Ultimate can possess up to 10 Hits Per Action. After the Ultimate is used, its Hits Per Action will be reset to the default level."
             },

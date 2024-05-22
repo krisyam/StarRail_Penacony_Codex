@@ -131,6 +131,12 @@ function SkillsDetails({item, index, name}){
                 <WhiteText style={charStyles.characterDetailsTitle} numberOfLines={5}>{item.name}</WhiteText>
             </View>
             <WhiteText>{item.description}</WhiteText>
+            <View style={{marginTop: 10}}>
+                {item?.energyCost && <WhiteText>Energy Cost: {item?.energyCost}</WhiteText>}
+                {item?.energyGeneration && <WhiteText>Energy Generation: {item?.energyGeneration}</WhiteText>}
+                {item?.toughnessDamage && typeof(item?.toughnessDamage) !== 'Object' && <WhiteText>Toughness Damage: {item?.toughnessDamage}</WhiteText>}
+            </View>
+            
         </>
     )
 }
