@@ -3,6 +3,7 @@ import React from "react";
 import { width, height } from "../../GlobalStyles.js";
 import { ModalContainer } from "../common/ModalContainer.js";
 import { useNavigation } from "@react-navigation/native";
+import { Icon } from "@rneui/base";
 
 export default Navigation = ({
     modalVisible=false,
@@ -21,25 +22,39 @@ export default Navigation = ({
             isDisplay={modalVisible}
             handleExit={handleCloseModal}
             // mainModalContainerStyle={styles.mainModalContainer}
-            containerStyle={styles.mainModalContainer}
+            containerStyle={navStyles.mainModalContainer}
         >
-            <TouchableOpacity onPress={() => handleOpenLink('Dashboard')}>
-                <Text>Dashboard</Text>
+            <TouchableOpacity 
+                onPress={handleCloseModal}
+                style={navStyles.closeButton}
+            >
+                <Icon
+                    name="x"
+                    type="feather"
+                    color="black"
+                    size={20}
+                    iconStyle={{
+                        marginRight: 5,
+                    }}
+                />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleOpenLink('Interactive Map')}>
-                <Text>Interactive Map</Text>
+            <TouchableOpacity style={navStyles.links} onPress={() => handleOpenLink('Dashboard')}>
+                <Text style={navStyles.linksText}>Dashboard</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleOpenLink('Herta Spin')}>
-                <Text>Herta Spin</Text>
+            <TouchableOpacity style={navStyles.links} onPress={() => handleOpenLink('Interactive Map')}>
+                <Text style={navStyles.linksText}>Interactive Map</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleOpenLink('Another Herta Spin')}>
-                <Text>Another Herta Spin</Text>
+            <TouchableOpacity style={navStyles.links} onPress={() => handleOpenLink('Herta Spin')}>
+                <Text style={navStyles.linksText}>Herta Spin</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={navStyles.links} onPress={() => handleOpenLink('Another Herta Spin')}>
+                <Text style={navStyles.linksText}>Another Herta Spin</Text>
             </TouchableOpacity>
         </ModalContainer>
     );
 }
 
-const styles = StyleSheet.create({
+const navStyles = StyleSheet.create({
     white_text: {
         fontSize: 16,
         color: "#fff",
@@ -56,16 +71,14 @@ const styles = StyleSheet.create({
         backgroundColor: "#AEAEAE",
         elevation: 50,
     },
-    logo_n_close: {
-        paddingTop: 20,
-        marginBottom: 20,
-        flexDirection: "row",
-        justifyContent: "space-around",
-        alignItems: "center",
-    },
     closeButton: {
         padding: 10,
-        // backgroundColor: 'gray',
+        width: 40,
+        marginTop: 20,
+        marginBottom: 40,
+        marginRight: 10,
+        alignSelf: 'flex-end',
+        // backgroundColor: 'white'
     },
     void_out_zone: {
         position: "absolute",
@@ -78,4 +91,13 @@ const styles = StyleSheet.create({
         // opacity: 0.5,
         elevation: 49,
     },
+    links: {
+        marginBottom: 4,
+        paddingVertical: 4,
+        paddingLeft: 5,
+    },
+    linksText: {
+        fontWeight: '600',
+        fontSize: 16
+    }
 });
